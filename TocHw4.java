@@ -34,18 +34,26 @@ public class TocHw4
 
   	public static JSONArray readJsonFromUrl(String url) throws IOException, JSONException 
 	{
-    		InputStream is = new URL(url).openStream();
-    		try 
+                try
 		{
-      			BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-      			String jsonText = readAll(rd);
-      			JSONArray json = new JSONArray(jsonText);
-      			return json;
-    		} 
-		finally 
+			InputStream is = new URL(url).openStream();
+                	try
+                	{
+                        	BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+                        	String jsonText = readAll(rd);
+				return jsonText;
+                	}
+                	finally
+                	{
+                        	is.close();
+                	}
+		}
+		catch(IOException e)
 		{
-      			is.close();
-    		}
+			System.out.println("找不到這個網址");
+			System.exit(1);
+		}
+		return "";
   	}
 
   	public static void main(String[] args) throws IOException, JSONException 
