@@ -1,3 +1,12 @@
+//F74001195  陳境圃
+/*
+	先把檔案讀下來
+	存成JSONArray
+	再利用JSONObject把要用到的欄位取出來
+	在做一下路名交易次數的計算
+	即可做出答案
+*/
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
