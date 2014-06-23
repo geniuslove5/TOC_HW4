@@ -32,32 +32,29 @@ public class TocHw4
     		return sb.toString();
   	}
 
-  	public static JSONArray readJsonFromUrl(String url) throws IOException, JSONException 
+	public static JSONArray readJsonFromUrl(String url) throws IOException, JSONException 
 	{
-                try
+    		InputStream is = new URL(url).openStream();
+    		try 
 		{
-			InputStream is = new URL(url).openStream();
-                	try
-                	{
-                        	BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-                        	String jsonText = readAll(rd);
-				return jsonText;
-                	}
-                	finally
-                	{
-                        	is.close();
-                	}
-		}
-		catch(IOException e)
+      			BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+      			String jsonText = readAll(rd);
+      			JSONArray json = new JSONArray(jsonText);
+      			return json;
+		} 
+		finally 
 		{
-			System.out.println("找不到這個網址");
-			System.exit(1);
-		}
-		return "";
+      			is.close();
+    		}
   	}
 
   	public static void main(String[] args) throws IOException, JSONException 
 	{
+		if(args.length!=1)
+		{
+			System.out.println("number of arguements is wrong");
+			return;
+		}
 	    	JSONArray json = readJsonFromUrl(args[0]);
     		JSONObject[] jsonobject = new JSONObject[json.length()];
 		String[] road = new String[json.length()];
